@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Espace Étudiant</title>
+    <style>
+        /* CSS MODERNE */
+        :root {
+            --primary: #4a90e2;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 { color: #333; margin-bottom: 1.5rem; }
+        
+        .input-group { margin-bottom: 1.5rem; text-align: left; }
+        
+        label { display: block; margin-bottom: 0.5rem; color: #666; font-size: 0.9rem; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Important pour le padding */
+            transition: border-color 0.3s;
+        }
+
+        input:focus { border-color: var(--primary); outline: none; }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover { background: #357abd; }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: none; /* Caché par défaut */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Espace Étudiant</h2>
+        <div class="input-group">
+            <label for="massar">Code Massar</label>
+            <input type="text" id="massar" placeholder="Entrez votre code (ex: R13...)" required>
+        </div>
+        <button onclick="login()">Se connecter</button>
+        <p id="error" class="error-msg">Code Massar incorrect !</p>
+    </div>
+
+    <script>
+        // LOGIQUE JAVASCRIPT (Simule le backend)
+        function login() {
+            const codeInput = document.getElementById('massar').value;
+            const validCode = "R134599413";
+            const errorMsg = document.getElementById('error');
+
+            if (codeInput === validCode) {
+                // Stocke une session pour dire que l'utilisateur est connecté
+                sessionStorage.setItem('isLoggedIn', 'true');
+                // Redirection vers la page de résultats
+                window.location.href = "resultats.html";
+            } else {
+                errorMsg.style.display = 'block';
+                // Animation de secousse pour l'erreur
+                const container = document.querySelector('.login-container');
+                container.style.transform = 'translateX(5px)';
+                setTimeout(() => container.style.transform = 'translateX(0)', 100);
+            }
+        }
+    </script>
+</body>
+</html>
